@@ -12,6 +12,14 @@ class Page(object):
     def __str__(self):
         return self.url + '\n' + self.src
 
+    def to_dict(self):
+        obj = {}
+        obj['url'] = self.url
+        obj['src'] = self.src
+        obj['title'] = self.title
+        obj['body'] = self.body
+        return obj
+
 
 class SearchResult(object):
 
@@ -24,3 +32,12 @@ class SearchResult(object):
 
     def __str__(self):
         return unicode(self).encode('utf8')
+
+    def to_dict(self):
+        obj = {}
+        obj['query'] = self.query
+        obj['results'] = []
+        for r in self.results:
+            obj['results'].append(r.to_dict())
+        return obj
+
